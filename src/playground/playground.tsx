@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { cloneDeep } from "lodash";
 
 import { checkAnyoneHasWon } from "../functions/hasWon";
 import { getNewRowPuzzles, getRowKey, getSymbol } from "../functions/symbol";
@@ -27,11 +28,7 @@ export const Playground: React.FC = () => {
   useEffect(() => {
     if (checkAnyoneHasWon(match)) {
       alert(`${changeTurn(turn)} has won!`);
-      setMatch({
-        row0: [null, null, null],
-        row1: [null, null, null],
-        row2: [null, null, null],
-      });
+      setMatch(cloneDeep(matchMap));
       setTurn("circle");
     }
   }, [match, turn]);
